@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이메일 인증</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #a349a4;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        .code {
+            font-size: 48px;
+            color: #a349a4;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .content {
+            font-size: 18px;
+            color: #333333;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .content a {
+            color: #8A2BE2;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #a349a4;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<div class="email-container">
+    <div class="header">
+        <h1>환영한다냥</h1>
+    </div>
+    <div class="content">
+        <p>안냥 ฅ^•ﻌ•^ฅ</p>
+        <p>이메일 인증을 위해 아래의 인증 코드를 입력해달라옹:</p>
+        <div class="code">
+            <span th:text="${code}">123456</span>
+        </div>
+    </div>
+    <div class="content">
+        <a href="https://your-redirect-url.com" class="link">얼른 와서 놀자냥 😺</a>
+    </div>
+    <div class="footer">
+        <p>© 2024 Today Dream. All rights reserved.</p>
+    </div>
+</div>
+</body>
+</html>
