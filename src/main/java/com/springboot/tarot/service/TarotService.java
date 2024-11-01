@@ -39,7 +39,7 @@ public class TarotService {
     public TarotDto.Response playTarot(TarotCategory category) {
         // 카테고리랑 랜덤카드 3개 뽑아서 GPT에 건네줌 > 결과 리턴
         //랜덤 숫자 만들어서 그걸로 findById()에 넣어서 카드 3개 출력
-// 랜덤으로 타로 카드 3장 뽑기
+        // 랜덤으로 타로 카드 3장 뽑기
         Tarot firstCard = drawRandomTarotCard();
         Tarot secondCard = drawRandomTarotCard();
         Tarot thirdCard = drawRandomTarotCard();
@@ -69,8 +69,9 @@ public class TarotService {
             throw new IllegalStateException("No Tarot cards available in the database.");
         }
         Random random = new Random();
-       // long randomId = random.nextInt((int)tarotLength);
-        long randomId = random.nextInt((int)tarotLength);
+        // long randomId = random.nextInt((int)tarotLength);
+        long randomId = random.nextInt((int)tarotLength) + 1;
+
         Optional<Tarot> tarotCard = tarotRepository.findById(randomId);
         return tarotCard.orElseThrow(() -> new IllegalArgumentException("Invalid Tarot ID: " + randomId));
     }
@@ -129,7 +130,7 @@ public class TarotService {
 
         if (response != null && response.getChoices() != null && !response.getChoices().isEmpty()) {
             String responseContent = response.getChoices().get(0).getMessage().getContent();
-             return  parseResponse(responseContent);
+            return  parseResponse(responseContent);
         }
         return null;
     }
@@ -149,6 +150,5 @@ public class TarotService {
         }
         return responseMap;
     }
-    }
-
+}
 

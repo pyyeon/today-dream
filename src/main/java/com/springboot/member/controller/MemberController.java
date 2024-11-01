@@ -30,7 +30,7 @@ import java.net.URI;
 public class MemberController {
     private final static String MEMBER_DEFAULT_URL = "/members";
     private final MemberService memberService;
-    
+
     private final MemberMapper mapper;
     private final AuthService authService;
     private final EmailService emailService;
