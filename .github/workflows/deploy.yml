@@ -67,5 +67,6 @@ jobs:
           -e APP_KEY=${{ secrets.APP_KEY }} \\
           -e APP_URL=${{ secrets.APP_URL }} \\
           -e JWT_KEY=${{ secrets.JWT_KEY }} \\
-            ]" \
+          dreamhigh'
+          ]" \
             --output text
