@@ -10,6 +10,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
       - name: Set up JDK 11
         uses: actions/setup-java@v2
         with:
@@ -37,9 +38,6 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-northeast-2
 
-      - name: Start Session Manager session
-        run: aws ssm start-session --target i-0352da18b718c5bfc
-
       - name: Deploy to Server
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
@@ -49,24 +47,24 @@ jobs:
           aws ssm send-command \
             --instance-ids i-0352da18b718c5bfc \
             --document-name "AWS-RunShellScript" \
-            --parameters "commands=[
-              'if sudo docker ps -a --format \\'{{.Names}}\\' | grep -q \\'^server$\\'; then',
-              '  sudo docker stop server',
-              '  sudo docker rm server',
-              'fi',
-              'sudo docker pull parkyeeyeon/dreamhigh:${GITHUB_SHA::7}',
-              'sudo docker tag parkyeeyeon/dreamhigh:${GITHUB_SHA::7} dreamhigh',
-              'sudo docker run -d --name server -p 8080:8080 \\
-          -e AWS_RDS_URL=${{ secrets.AWS_RDS_URL }} \\
-          -e AWS_RDS_USERNAME=${{ secrets.DATASOURCE_USERNAME }} \\
-          -e AWS_RDS_PASSWORD=${{ secrets.DATASOURCE_PASSWORD }} \\
-          -e G_CLIENT_ID=${{ secrets.G_CLIENT_ID }}
-          -e G_CLIENT_SECRET=${{ secrets.G_CLIENT_SECRET }}
-          -e MAIL_USERNAME=${{ secrets.MAIL_USERNAME }} \\
-          -e MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }} \\
-          -e APP_KEY=${{ secrets.APP_KEY }} \\
-          -e APP_URL=${{ secrets.APP_URL }} \\
-          -e JWT_KEY=${{ secrets.JWT_KEY }} \\
-          dreamhigh'
-          ]" \
+            --parameters '{"commands": [
+              "if sudo docker ps -a --format \'{{.Names}}\' | grep -q \'^server$\'; then",
+              "  sudo docker stop server",
+              "  sudo docker rm server",
+              "fi",
+              "sudo docker pull parkyeeyeon/dreamhigh:${GITHUB_SHA::7}",
+              "sudo docker tag parkyeeyeon/dreamhigh:${GITHUB_SHA::7} dreamhigh",
+              "sudo docker run -d --name server -p 8080:8080 \\",
+              "-e AWS_RDS_URL=${AWS_RDS_URL} \\",
+              "-e AWS_RDS_USERNAME=${AWS_RDS_USERNAME} \\",
+              "-e AWS_RDS_PASSWORD=${AWS_RDS_PASSWORD} \\",
+              "-e G_CLIENT_ID=${G_CLIENT_ID} \\",
+              "-e G_CLIENT_SECRET=${G_CLIENT_SECRET} \\",
+              "-e MAIL_USERNAME=${MAIL_USERNAME} \\",
+              "-e MAIL_PASSWORD=${MAIL_PASSWORD} \\",
+              "-e APP_KEY=${APP_KEY} \\",
+              "-e APP_URL=${APP_URL} \\",
+              "-e JWT_KEY=${JWT_KEY} \\",
+              "dreamhigh"
+            ]}' \
             --output text
