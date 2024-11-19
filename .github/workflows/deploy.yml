@@ -52,19 +52,9 @@ jobs:
               "  sudo docker stop server",
               "  sudo docker rm server",
               "fi",
-              "sudo docker pull parkyeeyeon/dreamhigh:${GITHUB_SHA::7}",
-              "sudo docker tag parkyeeyeon/dreamhigh:${GITHUB_SHA::7} dreamhigh",
-              "sudo docker run -d --name server -p 8080:8080 \\",
-              "-e AWS_RDS_URL=${AWS_RDS_URL} \\",
-              "-e AWS_RDS_USERNAME=${AWS_RDS_USERNAME} \\",
-              "-e AWS_RDS_PASSWORD=${AWS_RDS_PASSWORD} \\",
-              "-e G_CLIENT_ID=${G_CLIENT_ID} \\",
-              "-e G_CLIENT_SECRET=${G_CLIENT_SECRET} \\",
-              "-e MAIL_USERNAME=${MAIL_USERNAME} \\",
-              "-e MAIL_PASSWORD=${MAIL_PASSWORD} \\",
-              "-e APP_KEY=${APP_KEY} \\",
-              "-e APP_URL=${APP_URL} \\",
-              "-e JWT_KEY=${JWT_KEY} \\",
-              "dreamhigh"
+              "sudo docker pull ***/dreamhigh:${GITHUB_SHA::7}",
+              "sudo docker tag ***/dreamhigh:${GITHUB_SHA::7} dreamhigh",
+              "sudo docker run -d --name server -p 8080:8080 -e AWS_RDS_URL=${AWS_RDS_URL} -e AWS_RDS_USERNAME=${AWS_RDS_USERNAME} -e AWS_RDS_PASSWORD=${AWS_RDS_PASSWORD} -e G_CLIENT_ID=${G_CLIENT_ID} -e G_CLIENT_SECRET=${G_CLIENT_SECRET} -e MAIL_USERNAME=${MAIL_USERNAME} -e MAIL_PASSWORD=${MAIL_PASSWORD} -e APP_KEY=${APP_KEY} -e APP_URL=${APP_URL} -e JWT_KEY=${JWT_KEY} dreamhigh"
             ]}' \
             --output text
+
