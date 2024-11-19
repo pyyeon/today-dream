@@ -1,4 +1,4 @@
-gi add spring:
+spring:
   security:
     oauth2:
       client:
