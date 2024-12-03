@@ -48,8 +48,10 @@ public class Dream {
     private List<Comment> comments = new ArrayList<>();
 
 
-    @OneToMany(mappedBy = "dream", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "dream", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<DreamKeyword> dreamKeywords = new ArrayList<>();
+
+
 
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "interpretation_id")
@@ -70,6 +72,9 @@ public class Dream {
 
     @Column
     private Integer viewCount = 0;
+
+    @Version
+    private int version;
 
     public void addDreamKeywords(DreamKeyword dreamKeyword){
         this.dreamKeywords.add(dreamKeyword);

@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 public interface DreamRepository extends JpaRepository<Dream, Long> {
     Page<Dream> findByDreamKeywords_NameContaining(String keyword, Pageable pageable);
 
@@ -15,8 +17,25 @@ public interface DreamRepository extends JpaRepository<Dream, Long> {
 
     // 드림 상태가 ACTIVE인 드림을 필터링하고, 드림 키워드를 기반으로 검색하는 메소드
     // 키워드가 비어있으면 전체 드림을 반환
-    Page<Dream> findByDreamStatusAndDreamSecretAndDreamKeywords_NameContaining(Dream.DreamStatus status, Dream.DreamSecret dreamSecret, String keyword, Pageable pageRequest);
+
+
+    @Query("SELECT * FROM Dreams WHERE dream_status = 'DREAM_ACTIVE' AND dream_secret = 'DREAM_PUBLIC'")
+    Page<Dream> findByDreamStatusAndDreamSecretAndDreamKeywords_NameContaining(
+            Dream.DreamStatus status, Dream.DreamSecret dreamSecret, String keyword, Pageable pageRequest);
 
     Page<Dream> findByDreamStatusAndDreamSecret(Dream.DreamStatus status, Dream.DreamSecret dreamSecret, Pageable pageRequest);
 
+
+
+    @Query("SELECT d FROM Dream d JOIN FETCH d.dreamKeywords dk WHERE d.dreamStatus = :status AND d.dreamSecret = :secret AND dk.name LIKE %:keyword%")
+    List<Dream> findDreamsWithKeywords(@Param("status") Dream.DreamStatus status,
+                                       @Param("secret") Dream.DreamSecret secret,
+                                       @Param("keyword") String keyword);
+
 }
+
+
+
+
+
+
