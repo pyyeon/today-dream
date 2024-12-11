@@ -26,12 +26,15 @@ public interface DreamRepository extends JpaRepository<Dream, Long> {
     Page<Dream> findByDreamStatusAndDreamSecret(Dream.DreamStatus status, Dream.DreamSecret dreamSecret, Pageable pageRequest);
 
 
-
-    @Query("SELECT d FROM Dream d JOIN FETCH d.dreamKeywords dk WHERE d.dreamStatus = :status AND d.dreamSecret = :secret AND dk.name LIKE %:keyword%")
-    List<Dream> findDreamsWithKeywords(@Param("status") Dream.DreamStatus status,
-                                       @Param("secret") Dream.DreamSecret secret,
-                                       @Param("keyword") String keyword);
-
+    @Query("SELECT d FROM Dream d JOIN FETCH d.dreamKeywords dk " +
+            "WHERE d.dreamStatus = :status AND d.dreamSecret = :secret " +
+            "AND dk.name LIKE %:keyword%")
+    Page<Dream> findDreamsWithKeywords(
+            @Param("status") Dream.DreamStatus status,
+            @Param("secret") Dream.DreamSecret secret,
+            @Param("keyword") String keyword,
+            Pageable pageable
+    );
 }
 
 
