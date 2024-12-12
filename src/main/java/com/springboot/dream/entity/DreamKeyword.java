@@ -21,9 +21,11 @@ public class DreamKeyword {
     @Column(length = 20, nullable = false)
     private String name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "DREAM_ID")
     private Dream dream;
+
+
 
     public void addDream(Dream dream) {
         this.dream = dream;

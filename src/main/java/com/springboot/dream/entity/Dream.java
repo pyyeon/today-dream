@@ -48,8 +48,9 @@ public class Dream {
     private List<Comment> comments = new ArrayList<>();
 
 
-    @OneToMany(mappedBy = "dream", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    private List<DreamKeyword> dreamKeywords = new ArrayList<>();
+    @OneToMany(mappedBy = "dream", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<DreamKeyword> dreamKeywords;
+
 
 
 
