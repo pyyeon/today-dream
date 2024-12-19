@@ -47,11 +47,11 @@ public class MemberController {
     @PostMapping
     public ResponseEntity postMember(@Valid @RequestBody MemberDto.Post requestBody){
 
-        boolean isEmailVerified = emailService.verifyFinalAuthCode(requestBody.getEmail(), requestBody.getAuthCode());
+//        boolean isEmailVerified = emailService.verifyFinalAuthCode(requestBody.getEmail(), requestBody.getAuthCode());
 
-        if (!isEmailVerified) {
-            throw new BusinessLogicException(ExceptionCode.EMAIL_NOT_AUTH);
-        }
+//        if (!isEmailVerified) {
+//            throw new BusinessLogicException(ExceptionCode.EMAIL_NOT_AUTH);
+//        }
 
         Member member = mapper.memberPostToMember(requestBody);
 
