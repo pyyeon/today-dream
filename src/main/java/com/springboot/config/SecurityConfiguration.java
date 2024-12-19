@@ -91,9 +91,9 @@ public class SecurityConfiguration {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList("*"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PATCH", "DELETE"));
-        configuration.addAllowedOrigin("https://todaydream.com");
-        configuration.addAllowedOrigin("https://api.todaydream.com");
-        configuration.addAllowedOrigin("https://www.todaydream.com");
+        configuration.addAllowedOrigin("https://todaydream.shop");
+        configuration.addAllowedOrigin("https://api.todaydream.shop");
+        configuration.addAllowedOrigin("https://www.todaydream.shop");
         configuration.setExposedHeaders(Arrays.asList("Authorization", "Refresh"));
         configuration.addAllowedHeader("*");
         configuration.addAllowedMethod("*");
