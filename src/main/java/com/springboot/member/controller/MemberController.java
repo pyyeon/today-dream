@@ -3,8 +3,6 @@ package com.springboot.member.controller;
 
 import com.springboot.auth.service.AuthService;
 import com.springboot.email.service.EmailService;
-import com.springboot.exception.BusinessLogicException;
-import com.springboot.exception.ExceptionCode;
 import com.springboot.member.dto.MemberDto;
 import com.springboot.member.entity.Member;
 import com.springboot.member.mapper.MemberMapper;
@@ -13,6 +11,7 @@ import com.springboot.response.SingleResponseDto;
 import com.springboot.stamp.entity.Stamp;
 import com.springboot.utils.UriCreator;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -28,6 +27,8 @@ import java.net.URI;
 @Validated
 @RequestMapping("/members")
 public class MemberController {
+    @Value("${jwt.key}")
+    String secretKey;
     private final static String MEMBER_DEFAULT_URL = "/members";
     private final MemberService memberService;
 
@@ -60,6 +61,7 @@ public class MemberController {
         Member createdMember = memberService.createMember(member);
         URI location = UriCreator.createUri("/api/members", createdMember.getMemberId());
 
+        System.out.println(secretKey);
         return ResponseEntity.created(location).build();
     }
 
