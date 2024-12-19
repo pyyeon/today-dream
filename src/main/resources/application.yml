@@ -11,7 +11,7 @@ spring:
               - profile
   data:
     redis:
-      host: localhost
+      host: 15.165.160.125
       port: 6379
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
