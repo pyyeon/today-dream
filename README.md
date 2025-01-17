@@ -112,8 +112,10 @@
 | 페이지 (기능)         | 이미지                                                                                                                          |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | 메인                  | ![메인 페이지](https://github.com/user-attachments/assets/1dadffa7-6570-4b0f-a8c1-eaff280258ec)                 |
-| 해몽하기             | ![해몽하기](https://github.com/user-attachments/assets/4a50d88c-24ab-4e04-bd32-d0c60ad10cf9)                |
-| 회원가입             | ![회원가입](https://github.com/user-attachments/assets/6f312f14-b7fe-437c-8bd3-6df5c40c37eb) |
+| 해몽하기             | ![해몽하기](https://github.com/user-attachments/assets/4a50d88c-24ab-4e04-bd32-d0c60ad10cf9)                     |
+| 타로보기             | ![타로 홈-실행gif](https://github.com/user-attachments/assets/0b1afe5a-61e3-4623-9347-d90108c8662a)              |
+| 타로결과-캡쳐하기     | ![타로 결과-캡쳐gif](https://github.com/user-attachments/assets/f510f9f1-6dff-461d-9c00-fa692824f84e)            |
+| 회원가입             | ![회원가입](https://github.com/user-attachments/assets/6f312f14-b7fe-437c-8bd3-6df5c40c37eb)                     |
 | 회원정보수정-프로필 변경      | ![시연영상 프로필 변경](https://github.com/user-attachments/assets/6879b06c-8c1c-40da-bd45-7feb99e15db9)        |
 | 회원정보수정-닉네임 변경    | ![시연영상 닉네임변경](https://github.com/user-attachments/assets/db90bc73-94f9-452d-ab3a-7da8d8f4c3da)           |
 | 회원정보수정-비밀번호 변경 | ![비밀번호 변경](https://github.com/user-attachments/assets/92a20e0d-a953-4398-b633-4552f9729e70) |

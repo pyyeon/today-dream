@@ -187,9 +187,21 @@ public class DreamService {
         }
     }
 
+//    public Page<Dream> findDreams(String dreamKeyword, int page, int size) {
+//        return dreamRepository.findDreamsWithKeywords(
+//                Dream.DreamStatus.DREAM_ACTIVE,
+//                Dream.DreamSecret.DREAM_PUBLIC,
+//                dreamKeyword,
+//                PageRequest.of(page, size, Sort.by("dreamId").descending())
+//        );
+//    }
     public Page<Dream> findDreams(String dreamKeyword, int page, int size) {
-        return dreamRepository.findByDreamStatusAndDreamSecretAndDreamKeywords_NameContaining(Dream.DreamStatus.DREAM_ACTIVE, Dream.DreamSecret.DREAM_PUBLIC, dreamKeyword, PageRequest.of(page, size, Sort.by("dreamId").descending()));
+        return dreamRepository.findByDreamStatusAndDreamSecretAndDreamKeywords_NameContaining(Dream.DreamStatus.DREAM_ACTIVE,
+                Dream.DreamSecret.DREAM_PUBLIC, dreamKeyword, PageRequest.of(page, size, Sort.by("dreamId").descending()));
     }
+
+
+
 
     public Page<Dream> findAllDreams(int page, int size){
         return dreamRepository.findByDreamStatus(Dream.DreamStatus.DREAM_ACTIVE,PageRequest.of(page, size,

@@ -12,6 +12,7 @@ import com.springboot.member.repository.MemberRepository;
 import com.springboot.picture.entity.RewardPicture;
 import com.springboot.picture.service.RewardPictureService;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.annotation.Role;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -23,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static com.springboot.member.entity.Member.MemberStatus.MEMBER_ACTIVE;
 import static com.springboot.member.entity.Member.MemberStatus.MEMBER_QUIT;

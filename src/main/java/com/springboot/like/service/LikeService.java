@@ -44,6 +44,8 @@ public class LikeService {
 
     // return likeRepository.save(like);
     // }
+
+
     public Like createLike(Like like, String email) {
         Member findMember = memberService.findVerifiedMember(email);
         Dream dream = dreamService.findVerifiedDream(like.getDream().getDreamId());
@@ -64,3 +66,6 @@ public class LikeService {
     }
 
 }
+
+
+
