@@ -105,7 +105,7 @@ public class TarotService {
                 "(21, 'Judgment', '부활, 내적 각성, 평가'),\n" +
                 "(22, 'The World', '완성, 성취, 통합')" +
                 "여기서 타로카드를 세장 뽑아서 각각 카드의 이름(cardName)과 뜻(cardMeaning)을 알려주고," +
-                "그 세 장 카드에 대한 해석은 category에 따라 result에 담아서 주는데, 구체적이고 현실적이어야 해. 두괄식으로. 안 좋은 일이라도 그대로 솔직히 말해도 돼. " +
+                "그 세 장 카드에 대한 해석은 category에 따라 result에 담아서 주는데, 구체적이고 현실적이어야 해. 안 좋은 일이라도 그대로 솔직히 말해도 돼. " +
                 "응답을 줄 때는 다음과 같은 형식으로 해줘(아래 예시와 같은 형식으로 줘.):\n" +
                 " 아래는 결과 예시야:\n" +
                 "\n" +
@@ -121,7 +121,7 @@ public class TarotService {
                 "firstCard: 첫 번째 카드의 이름(cardName) - 첫 번째 카드의 뜻(cardMeaning)\n" +
                 "secondCard: 두 번째 카드의 이름(cardName) - 두 번째 카드의 뜻(cardMeaning)\n" +
                 "thirdCard: 세 번째 카드의 이름(cardName) - 세 번째 카드의 뜻(cardMeaning)\n" +
-                "result: firstCard와 secondCard와 thirdCard의 의미(cardMeaning)를 합쳐서 간결하고 자세한 해석을 3줄에서 12줄 사이로 작성해줘. 이 해석은 구체적이고 현실적이어야 해." +
+                "result: firstCard와 secondCard와 thirdCard의 의미(cardMeaning)를 합쳐서 간결하고 자세한 해석을 3줄에서 12줄 사이로 작성해줘. 두괄식으로. 이 해석은 구체적이고 현실적이어야 해." +
                 "이 해석 내용은 그날의 운세나 조언이 될 수 있어야 해. 그리고 UTF-8 인코딩을 지켜줘야 해.";
 
 
