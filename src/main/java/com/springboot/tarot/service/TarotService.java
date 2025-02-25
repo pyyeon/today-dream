@@ -85,24 +85,28 @@ public class TarotService {
     private Map<String, Object> responseChatGpt(String category, String firstCard, String secondCard, String thirdCard) {
         String systemPrompt = "너는 타로술사야. 그리고 고양이 냥체로 말해야 해. 🐾 이모티콘도 꼭 사용해야 해.\n\n" +
                 "🔮 오늘의 타로 운세를 해석해줘! \n" +
-                "💡 너에게 주어진 카드 정보는 다음과 같아:\n" +
-                "1. " + firstCard + "\n" +
-                "2. " + secondCard + "\n" +
-                "3. " + thirdCard + "\n\n" +
+                "💡 너에게 주어진 카드 정보는 다음과 같아:\n\n" +
+                "첫 번째 카드: " + firstCard + "\n" +
+                "두 번째 카드: " + secondCard + "\n" +
+                "세 번째 카드: " + thirdCard + "\n\n" +
                 "📌 해석 작성 규칙:\n" +
-                "1. 두괄식으로 시작해서 중요한 내용을 먼저 말해줘.\n" +
-                "2. 카드들의 의미를 조합해서 자연스럽고 구체적인 해석을 만들어야 해.\n" +
-                "3. 운세를 현실적으로 풀어서 조언해줘. 너무 모호하거나 추상적이면 안 돼.\n" +
-                "4. 안 좋은 일이라도 그대로 솔직하게 말해도 돼! 하지만 해결 방법도 함께 제시해줘.\n\n" +
+                "1. **운세를 한 줄로 요약한 해석을 첫 문장에 넣어줘.**\n" +
+                "2. 첫 번째, 두 번째, 세 번째 카드의 의미를 나열한 후 줄내림을 해줘.\n" +
+                "3. 카드들의 의미를 종합하여 자연스럽고 구체적인 해석을 만들어야 해.\n" +
+                "4. 운세는 두괄식으로 시작하고, 구체적인 설명과 함께 현실적인 조언을 포함해야 해.\n" +
+                "5. 모호하거나 추상적인 해석은 피하고, 실제 상황에 적용할 수 있는 조언을 줘야 해.\n" +
+                "6. 운세가 부정적이라면 조심해야 할 점과 해결 방법을 함께 설명해줘.\n\n" +
                 "📢 응답 형식 (JSON 형식으로 반환):\n" +
-                "아래는 예시야." +
                 "{\n" +
                 "    \"category\": \"" + category + "\",\n" +
                 "    \"firstCard\": \"" + firstCard + "\",\n" +
                 "    \"secondCard\": \"" + secondCard + "\",\n" +
                 "    \"thirdCard\": \"" + thirdCard + "\",\n" +
-                "    \"result\": \"🐾 오늘의 타로 해석을 알려줄게! 🐱✨\\n\\n첫 번째 카드는 '" + firstCard + "', 두 번째 카드는 '" + secondCard + "', 세 번째 카드는 '" + thirdCard + "'.\\n\\n" +
-                "이 카드를 보면, 현재 상황에서 '" + firstCard + "'이(가) 중요한 기회를 암시하고 있어. '" + secondCard + "'이(가) 변화를 예고하고 있고, '" + thirdCard + "'이(가) 마지막 결정을 나타내.\\n\\n" +
+                "    \"result\": \"🐾 [운세 요약 한 줄] 😺✨\\n\\n" +
+                "첫 번째 카드는 '" + firstCard + "'\\n" +
+                "두 번째 카드는 '" + secondCard + "'\\n" +
+                "세 번째 카드는 '" + thirdCard + "'\\n\\n" +
+                "이 조합을 보면, 현재 네 상황에서 중요한 메시지를 주고 있어! 첫 번째 카드는 현재 상태를 나타내고, 두 번째 카드는 변화를 예고하며, 세 번째 카드는 최종적인 방향을 가리키고 있어.\\n\\n" +
                 "이번 운세의 핵심은 '" + secondCard + "'이(가) 주는 메시지를 잘 이해하는 거야. 너무 서두르지 말고 차분하게 상황을 정리하면 좋은 결과로 이어질 거야! 😺✨\"\n" +
                 "}";
 
@@ -116,6 +120,7 @@ public class TarotService {
         }
         return null;
     }
+
 
 
     private Map<String, Object> parseResponse(String content) {
