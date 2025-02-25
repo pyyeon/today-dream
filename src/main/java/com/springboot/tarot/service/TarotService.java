@@ -50,7 +50,12 @@ public class TarotService {
         String thirdCardDescription = thirdCard.getName() + " - " + thirdCard.getMeaning();
 
         // 카드의 이름과 의미를 GPT에 전달하여 해석을 받음
-        Map<String, Object> chatResponse = responseChatGpt(category.getCategoryName());
+       Map<String, Object> chatResponse = responseChatGpt(
+                category.getCategoryName(),
+                firstCard.getName() + " - " + firstCard.getMeaning(),
+                secondCard.getName() + " - " + secondCard.getMeaning(),
+                thirdCard.getName() + " - " + thirdCard.getMeaning()
+        );
 
         // 응답 데이터를 Response DTO에 담아 반환
         TarotDto.Response response = new TarotDto.Response();
