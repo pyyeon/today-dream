@@ -16,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
 
+
 @Transactional
 @Service
 public class TarotService {
@@ -96,20 +97,11 @@ public class TarotService {
                 "첫 번째 카드: " + firstCard + " - " + firstMeaning + "\n" +
                 "두 번째 카드: " + secondCard + " - " + secondMeaning + "\n" +
                 "세 번째 카드: " + thirdCard + " - " + thirdMeaning + "\n\n" +
-                "📌 해석 작성 규칙:\n" +
-                "1. **운세를 한 줄로 요약한 내용을 'summary' 필드에 작성해줘.**\n" +
-                "2. 'summary'는 직관적으로 운세의 핵심을 전달해야 해.\n" +
-                "3. 첫 번째, 두 번째, 세 번째 카드의 의미를 따로 JSON 필드에 넣어줘.\n" +
-                "4. 카드들의 의미를 종합하여 자연스럽고 구체적인 해석을 'result' 필드에 작성해.\n" +
-                "5. 운세는 두괄식으로 시작하고, 구체적인 설명과 함께 현실적인 조언을 포함해야 해.\n" +
-                "6. 모호하거나 추상적인 해석은 피하고, 실제 상황에 적용할 수 있는 조언을 줘야 해.\n" +
-                "7. 운세가 부정적이라면 조심해야 할 점과 해결 방법을 함께 설명해줘.\n\n" +
-                "📢 응답 형식 (JSON 형식으로 반환):\n" +
+                "📌 **응답 형식(JSON)으로 다음처럼 작성해줘:**\n" +
                 "{\n" +
                 "    \"category\": \"" + category + "\",\n" +
-                "    \"summary\": \"🐾 [운세 요약 한 줄] 😺✨\",\n" +
-                "    \"result\": \"이 조합을 보면, 현재 네 상황에서 중요한 메시지를 주고 있어! 첫 번째 카드는 현재 상태를 나타내고, 두 번째 카드는 변화를 예고하며, 세 번째 카드는 최종적인 방향을 가리키고 있어.\\n\\n" +
-                "이번 운세의 핵심은 '" + secondCard + "'이(가) 주는 메시지를 잘 이해하는 거야. 너무 서두르지 말고 차분하게 상황을 정리하면 좋은 결과로 이어질 거야! 😺✨\"\n" +
+                "    \"summary\": \"운세 요약 한 줄을 여기에 입력해줘. 🐾😺✨\",\n" +
+                "    \"result\": \"상세 해석을 여기에 작성해줘. 첫 문장은 두괄식으로 간단한 요약을 포함하고, 이어서 현실적인 조언을 포함해야 해.\"\n" +
                 "}";
 
         // OpenAI API 요청 생성
@@ -123,12 +115,20 @@ public class TarotService {
         return null;
     }
 
+
     private Map<String, Object> parseResponse(String content) {
         Map<String, Object> responseMap = new HashMap<>();
         try {
             JsonNode rootNode = objectMapper.readTree(content);
             responseMap.put("category", rootNode.path("category").asText());
-            responseMap.put("summary", rootNode.path("summary").asText());
+
+            // 🛠 `summary` 변수를 확실하게 설정
+            String summaryText = rootNode.path("summary").asText();
+            if (summaryText == null || summaryText.isEmpty()) {
+                summaryText = "운세 요약이 없습니다. 😺✨";
+            }
+            responseMap.put("summary", summaryText);
+
             responseMap.put("result", rootNode.path("result").asText());
         } catch (Exception e) {
             responseMap.put("error", "Failed to parse response");
@@ -136,4 +136,6 @@ public class TarotService {
         }
         return responseMap;
     }
+
+
 }
