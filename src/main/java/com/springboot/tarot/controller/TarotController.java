@@ -1,5 +1,4 @@
 package com.springboot.tarot.controller;
-
 import com.springboot.response.SingleResponseDto;
 import com.springboot.tarot.dto.TarotDto;
 import com.springboot.tarot.entity.Tarot;
@@ -7,16 +6,11 @@ import com.springboot.tarot.entity.TarotCategory;
 import com.springboot.tarot.mapper.TarotMapper;
 import com.springboot.tarot.service.TarotService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.http.*;
+import org.springframework.validation.annotation.*;
+import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+import java.util.*;
 
 @RestController
 @RequestMapping("/tarots")
@@ -35,16 +29,22 @@ public class TarotController {
 
     @PostMapping
     public ResponseEntity postTarot(@Valid @RequestBody TarotDto.Post inputCategory) {
-
-        //어떤매퍼가 필요하니
-        //제이슨을 받으면 카테고리로 바꿔주는 매퍼 필요해
+        // PostDto -> TarotCategory 변환
         TarotCategory category = mapper.postDtoToTarotCategory(inputCategory);
 
-        TarotDto.Response response = tarotService.playTarot(category);
+        // 타로카드 3장 뽑기
+        List<Tarot> cards = tarotService.playTarot(category);
 
+        // GPT 해석 결과 가져오기
+        Map<String, Object> gptResult = tarotService.getTarotInterpretation(category, cards);
 
-        //mapping으로 카테고리 받으면 포스트디티오 -> 카테고리 로 변환
-        return new ResponseEntity(new SingleResponseDto<>(response), HttpStatus.OK);
+        // DTO 매핑
+        TarotDto.Response responseDto = mapper.toResponseDto(category, cards, gptResult);
+
+        return new ResponseEntity<>(new SingleResponseDto<>(responseDto), HttpStatus.OK);
+    }
+
+    // GPT 해석 결과를 가져오는 메서드
 
 }
-}
+

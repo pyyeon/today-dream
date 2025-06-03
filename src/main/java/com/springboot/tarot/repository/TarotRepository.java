@@ -7,5 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface TarotRepository extends JpaRepository<Tarot, Long> {
-
+    @Query("SELECT t.id FROM Tarot t")
+    List<Long> findAllIds();
 }
