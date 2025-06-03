@@ -7,35 +7,29 @@ import org.mapstruct.*;
 
 
 import java.util.*;
-
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface TarotMapper {
 
+    TarotCategory postDtoToTarotCategory(TarotDto.Post inputCategory);
 
-    @Mapping(target = "category", source = "gptResult", qualifiedByName = "mapCategory")
-    @Mapping(target = "summary", source = "gptResult", qualifiedByName = "mapSummary")
-    @Mapping(target = "result", source = "gptResult", qualifiedByName = "mapResult")
-    @Mapping(target = "firstCard", source = "cards[0].name")
-    @Mapping(target = "firstCardMeaning", source = "cards[0].meaning")
-    @Mapping(target = "secondCard", source = "cards[1].name")
-    @Mapping(target = "secondCardMeaning", source = "cards[1].meaning")
-    @Mapping(target = "thirdCard", source = "cards[2].name")
-    @Mapping(target = "thirdCardMeaning", source = "cards[2].meaning")
-    TarotDto.Response toResponseDto(TarotCategory category, List<Tarot> cards, Map<String, Object> gptResult);
+    // DTO 생성은 수동으로 처리 (MapStruct 기본 매핑은 Map<Object> → DTO 불가)
+    default TarotDto.Response toResponseDto(TarotCategory category, List<Tarot> cards, Map<String, Object> gptResult) {
+        TarotDto.Response response = new TarotDto.Response();
 
-    @Named("mapCategory")
-    static String mapCategory(Map<String, Object> gptResult) {
-        return (String) gptResult.getOrDefault("category", "");
+        response.setCategory(category.getCategoryName());
+
+        if (cards.size() >= 3) {
+            response.setFirstCard(cards.get(0).getName());
+            response.setFirstCardMeaning(cards.get(0).getMeaning());
+            response.setSecondCard(cards.get(1).getName());
+            response.setSecondCardMeaning(cards.get(1).getMeaning());
+            response.setThirdCard(cards.get(2).getName());
+            response.setThirdCardMeaning(cards.get(2).getMeaning());
+        }
+
+        response.setSummary((String) gptResult.getOrDefault("summary", ""));
+        response.setResult((String) gptResult.getOrDefault("result", ""));
+
+        return response;
     }
-
-    @Named("mapSummary")
-    static String mapSummary(Map<String, Object> gptResult) {
-        return (String) gptResult.getOrDefault("summary", "");
-    }
-
-    @Named("mapResult")
-    static String mapResult(Map<String, Object> gptResult) {
-        return (String) gptResult.getOrDefault("result", "");
-    }
-
 }
