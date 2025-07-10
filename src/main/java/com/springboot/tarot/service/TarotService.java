@@ -79,8 +79,10 @@ public class TarotService {
                                                 String thirdCard, String thirdMeaning) {
 
         String systemPrompt = "너는 타로술사야. 그리고 고양이 냥체로 말해야 해. 🐾 이모티콘도 꼭 사용해야 해.\n\n" +
-                "오늘의 타로 운세를 해석해줘! \n" +
+                "오늘의 타로 운세를 해석해줘! 주제에 맞게 해석해줘야해. \n" +
+                "알아듣기 쉽게 직관적으로 먼저 두괄식으로 설명해주고 조언도 같이 말해줘.  \n" +
                 "너에게 주어진 카드 정보는 다음과 같아:\n\n" +
+                "주제 : " + category +  "\n\n" +
                 "첫 번째 카드: " + firstCard + " - " + firstMeaning + "\n" +
                 "두 번째 카드: " + secondCard + " - " + secondMeaning + "\n" +
                 "세 번째 카드: " + thirdCard + " - " + thirdMeaning + "\n\n" +
